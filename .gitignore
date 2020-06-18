@@ -1,35 +1,12 @@
 *.class
 
-#Javadoc files
-dist/
-.publish/
-
-#javadoc overview files generated from README.md
-readme_overview.html
-**/javadocTemp/**
-**/sourceTemp/**
-
 #External libs
 extlib/
-
-# Auth files
-*.auth
-*.azureauth
-
-# Local checkstyle
-*.checkstyle
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
 
 # Package Files #
 *.jar
 *.war
 *.ear
-
-# Azure Tooling #
-node_modules
-packages
 
 # Eclipse #
 *.pydevproject
@@ -68,3 +45,6 @@ package-lock.json
 # VS Code
 .vscode/
 .factorypath
+
+# Log files
+*.log

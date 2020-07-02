@@ -73,6 +73,7 @@ class ReactorNettyClient {
             .responseConnection((reactorNettyResponse, reactorNettyConnection) -> {
                 HttpResponse httpResponse = new ReactorNettyHttpResponse(reactorNettyResponse,
                     reactorNettyConnection).withRequest(request);
+                logger.info("Setting response reference : {}", httpResponse);
                 responseAtomicReference.set((ReactorNettyHttpResponse)httpResponse);
                 return Mono.just(httpResponse);
             })

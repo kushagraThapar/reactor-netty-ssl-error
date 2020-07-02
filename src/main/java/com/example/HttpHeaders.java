@@ -48,6 +48,14 @@ public class HttpHeaders implements Iterable<HttpHeader> {
         return this;
     }
 
+    public long getContentLength() {
+        HttpHeader httpHeader = headers.get("Content-Length");
+        if (httpHeader != null) {
+            return Long.parseLong(httpHeader.value());
+        }
+        return -1;
+    }
+
     @Override
     public Iterator<HttpHeader> iterator() {
         return headers.values().iterator();

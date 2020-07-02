@@ -94,9 +94,9 @@ public class MainApplication {
         }
 
         public HttpRequest getRequest(String url) {
-            Flux<ByteBuf> bodyByteBufFlux =
-                Flux.just(Unpooled.wrappedBuffer(getBody(url).getBytes()));
-            HttpHeaders httpHeaders = getHttpHeaders();
+            byte[] bytes = getBody(url).getBytes();
+            Flux<ByteBuf> bodyByteBufFlux = Flux.just(Unpooled.wrappedBuffer(bytes));
+            HttpHeaders httpHeaders = getHttpHeaders(bytes);
             try {
                 return new HttpRequest(HttpMethod.POST, "https://rel.ink/api/links/", httpHeaders,
                     bodyByteBufFlux);
@@ -110,12 +110,13 @@ public class MainApplication {
             return "{\"url\": \"" + url + "\"}";
         }
 
-        public HttpHeaders getHttpHeaders() {
+        public HttpHeaders getHttpHeaders(byte[] bytes) {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set("Content-Type", "application/json; utf-8");
             httpHeaders.set("Accept", "application/json");
             httpHeaders.set("Cache-Control", "no-cache");
             httpHeaders.set("Transfer-Encoding", "chunked");
+            httpHeaders.set("Content-Length", String.valueOf(bytes.length));
             return httpHeaders;
         }
     }
